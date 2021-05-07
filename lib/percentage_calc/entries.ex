@@ -42,7 +42,7 @@ defmodule PercentageCalc.Entries do
 
     case ans do
       nil ->
-        0
+        "0"
 
       a ->
         a
@@ -59,7 +59,7 @@ defmodule PercentageCalc.Entries do
 
     case ans do
       nil ->
-        0
+        "0"
 
       a ->
         a

@@ -150,8 +150,8 @@ defmodule PercentageCalcWeb.PageLive do
       subjective < 0 and subjective > 40 ->
         "Subjective marks should be between 0 and 40"
 
-      part < 0 and part > 4 ->
-        "Class participation marks should be between 0 and 4"
+      part < 0 and part > 5 ->
+        "Class participation marks should be between 0 and 5"
 
       true ->
         nil

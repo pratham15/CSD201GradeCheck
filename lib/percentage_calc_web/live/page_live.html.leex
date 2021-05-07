@@ -1,48 +1,114 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>Peace of mind from prototype to production</p>
+<section>
+  <h1>CSE201 percentage calculator</h1>
 
-  <form phx-change="suggest" phx-submit="search">
-    <input type="text" name="q" value="<%= @query %>" placeholder="Live dependency search" list="results" autocomplete="off"/>
-    <datalist id="results">
-      <%= for {app, _vsn} <- @results do %>
-        <option value="<%= app %>"><%= app %></option>
-      <% end %>
-    </datalist>
-    <button type="submit" phx-disable-with="Searching...">Go to Hexdocs</button>
+  <%= @error %>
+
+  <%= if @done do %>
+    <h4>Till Now: <%= @till_now %> out of 65</h4>
+    <h4>End sems: <%= @end_sem %> out of 35</h4>
+    <h4>Total: <%= @total %> out of 100</h4>
+  <% else %>
+  <form phx-submit="calculate">
+    <input type="text" name="name" placeholder="Name" required />
+    <input type="text" name="email" placeholder="SNU Email" required />
+
+    <h3>Quiz Marks</h3>
+
+    <label for="quiz1">Quiz 1 (/15)</label>
+    <input
+      type="number"
+      name="quiz1"
+      placeholder="Quiz 1 (/15)"
+      max="15"
+      min="0"
+      value="0"
+      step="0.5"
+    />
+    <label for="quiz1">Quiz 2 (/15)</label>
+    <input
+      type="number"
+      name="quiz2"
+      placeholder="Quiz 2 (/15)"
+      max="15"
+      min="0"
+      value="0"
+      step="0.5"
+    />
+    <label for="quiz1">Quiz 3 (/10)</label>
+    <input
+      type="number"
+      name="quiz3"
+      placeholder="Quiz 3 (/10)"
+      max="10"
+      min="0"
+      value="0"
+      step="0.5"
+    />
+
+    <h3>Lab marks</h3>
+
+    <label for="lab1">Lab 1 (/5)</label>
+    <input
+      type="number"
+      name="lab1"
+      placeholder="Lab 1 (/5)"
+      max="5"
+      min="0"
+      value="0"
+      step="0.5"
+    />
+    <label for="lab2">Lab 2 (/7)</label>
+    <input
+      type="number"
+      name="lab2"
+      placeholder="Lab 2 (/7)"
+      max="7"
+      min="0"
+      value="0"
+      step="0.5"
+    />
+
+    <h3>Mid Sems</h3>
+
+    <label for="objective">Objective (/20)</label>
+    <input
+      type="number"
+      name="objective"
+      placeholder="Objective (/20)"
+      max="20"
+      min="0"
+      value="0"
+      step="0.5"
+    />
+    <label for="subjective">Subjective (/40)</label>
+    <input
+      type="number"
+      name="subjective"
+      placeholder="Subjective (/40)"
+      max="40"
+      min="0"
+      value="0"
+      step="0.5"
+    />
+
+    <h5>
+      If you have been active in classes and have done all assignments, enter 4
+      <br />
+      Else enter less, according to you class participating and submission
+    </h5>
+
+    <label for="part">Class participation (/4)</label>
+    <input
+      type="number"
+      name="part"
+      placeholder="Class participation (/4)"
+      max="4"
+      min="0"
+      value="0"
+      step="0.5"
+    />
+
+    <button type="submit" phx-disable-with="Calculating...">calculate</button>
   </form>
-</section>
-
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.5/CHANGELOG.md">v1.5 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-      <li>
-        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
-      </li>
-    </ul>
-  </article>
+  <% end %>
 </section>

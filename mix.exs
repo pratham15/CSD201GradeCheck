@@ -20,7 +20,7 @@ defmodule PercentageCalc.MixProject do
   def application do
     [
       mod: {PercentageCalc.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -46,7 +46,8 @@ defmodule PercentageCalc.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:ecto_psql_extras, "~> 0.2"}
     ]
   end
 

@@ -1,8 +1,12 @@
 defmodule PercentageCalcWeb.PageLive do
   use PercentageCalcWeb, :live_view
 
+  alias PercentageCalc.Entries
+
   @impl true
   def mount(_params, _session, socket) do
+    {avg, median} = get_stats()
+
     {:ok,
      assign(
        socket,
@@ -15,7 +19,9 @@ defmodule PercentageCalcWeb.PageLive do
        till_now: "",
        end_sem: "",
        total: "",
-       done: false
+       done: false,
+       median: median,
+       avg: avg
      )}
   end
 
@@ -28,17 +34,45 @@ defmodule PercentageCalcWeb.PageLive do
     else
       {till_now, end_sem, total} = calc(state)
 
-      {
-        :noreply,
-        assign(
-          socket,
-          till_now: :erlang.float_to_binary(till_now, decimals: 2),
-          end_sem: :erlang.float_to_binary(end_sem, decimals: 2),
-          total: :erlang.float_to_binary(total, decimals: 2),
-          done: true
-        )
-      }
+      try do
+        Entries.create_entry(%{
+          email: state["email"],
+          name: state["name"],
+          percentage: total
+        })
+
+        {avg, median} = get_stats()
+
+        {
+          :noreply,
+          assign(
+            socket,
+            till_now: :erlang.float_to_binary(till_now, decimals: 2),
+            end_sem: :erlang.float_to_binary(end_sem, decimals: 2),
+            total: :erlang.float_to_binary(total, decimals: 2),
+            done: true,
+            avg: avg,
+            median: median
+          )
+        }
+      rescue
+        _a ->
+          {
+            :noreply,
+            assign(socket, error: "User already calculated")
+          }
+      end
     end
+  end
+
+  defp get_stats do
+    avg = Entries.get_percentage()
+    median = Entries.get_median()
+
+    {
+      :erlang.float_to_binary(avg, decimals: 2),
+      :erlang.float_to_binary(median, decimals: 2)
+    }
   end
 
   defp calc(state) do

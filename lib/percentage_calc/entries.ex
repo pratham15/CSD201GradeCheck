@@ -37,6 +37,35 @@ defmodule PercentageCalc.Entries do
   """
   def get_entry!(id), do: Repo.get!(Entry, id)
 
+  def get_percentage do
+    ans = Repo.aggregate(Entry, :avg, :percentage)
+
+    case ans do
+      nil ->
+        0
+
+      a ->
+        a
+    end
+  end
+
+  def get_median do
+    %{rows: rows} =
+      Repo.query!(
+        "SELECT percentile_disc(0.5) WITHIN GROUP (ORDER BY entries.percentage) FROM entries;"
+      )
+
+    ans = rows |> Enum.fetch!(0) |> Enum.fetch!(0)
+
+    case ans do
+      nil ->
+        0
+
+      a ->
+        a
+    end
+  end
+
   @doc """
   Creates a entry.
 

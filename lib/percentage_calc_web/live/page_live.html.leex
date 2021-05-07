@@ -1,9 +1,15 @@
 <section>
   <h1>CSE201 percentage calculator</h1>
+  <h3>Note: once entered, entries can't be changed</h3>
 
-  <%= @error %>
+  <h1><%= @error %></h1>
+
+  <h4>Average Percentage: <%= @avg %></h4>
+  <h4>Median Percentage: <%= @median %></h4>
+  <br />
 
   <%= if @done do %>
+    <h2>Your data</h2>
     <h4>Till Now: <%= @till_now %> out of 65</h4>
     <h4>End sems: <%= @end_sem %> out of 35</h4>
     <h4>Total: <%= @total %> out of 100</h4>

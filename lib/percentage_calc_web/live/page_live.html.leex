@@ -2,11 +2,9 @@
   <h1>CSE201 percentage calculator</h1>
   <h3>Note: once entered, entries can't be changed</h3>
 
-  <h1><%= @error %></h1>
+  <button phx-click="view_stats">View Stats</button>
 
-  <h4>Average Percentage: <%= @avg %></h4>
-  <h4>Median Percentage: <%= @median %></h4>
-  <br />
+  <h1><%= @error %></h1>
 
   <%= if @done do %>
     <h2>Your data</h2>

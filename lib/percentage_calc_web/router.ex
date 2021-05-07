@@ -22,6 +22,7 @@ defmodule PercentageCalcWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+    get "/stats", StatsController, :index
   end
 
   # Other scopes may use custom stacks.

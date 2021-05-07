@@ -1,0 +1,9 @@
+<h1>General stats</h1>
+
+<ul>
+  <li><b>Average Percentage: </b><%= @avg %></li>
+  <li><b>Median Percentage: </b><%= @median %></li>
+  <%= for {name, value} <- @stats do %>
+    <li><b><%= name %>: </b><%= value %></li>
+  <% end %>
+</ul>

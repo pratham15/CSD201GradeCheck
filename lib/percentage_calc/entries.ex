@@ -66,6 +66,52 @@ defmodule PercentageCalc.Entries do
     end
   end
 
+  def get_segment_stats do
+    queries = [
+      {"Less than 40%",
+       from(
+         e in Entry,
+         where: e.percentage <= 40.0,
+         select: count(e)
+       )},
+      {"Between 40% and 50%",
+       from(e in Entry,
+         where: e.percentage > 40.0 and e.percentage <= 50.0,
+         select: count(e)
+       )},
+      {"Between 50% and 60%",
+       from(e in Entry,
+         where: e.percentage > 50.0 and e.percentage <= 60.0,
+         select: count(e)
+       )},
+      {"Between 60% and 70%",
+       from(e in Entry,
+         where: e.percentage > 60.0 and e.percentage <= 70.0,
+         select: count(e)
+       )},
+      {"Between 70% and 80%",
+       from(e in Entry,
+         where: e.percentage > 70.0 and e.percentage <= 80.0,
+         select: count(e)
+       )},
+      {"More than 80%",
+       from(
+         e in Entry,
+         where: e.percentage > 80.0,
+         select: count(e)
+       )},
+      {"Total submissions",
+       from(
+         e in Entry,
+         select: count(e)
+       )}
+    ]
+
+    Enum.map(queries, fn {name, query} ->
+      {name, Repo.all(query) |> Enum.fetch!(0)}
+    end)
+  end
+
   @doc """
   Creates a entry.
 

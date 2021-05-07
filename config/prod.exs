@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :percentage_calc, PercentageCalcWeb.Endpoint,
-  url: [host: "csd201-percentage-calc.gigalixirapp.com", port: 443],
+  url: [host: nil],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production

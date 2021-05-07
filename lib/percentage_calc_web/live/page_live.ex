@@ -107,8 +107,6 @@ defmodule PercentageCalcWeb.PageLive do
   end
 
   defp validate(state) do
-    IO.puts(inspect(state))
-
     %{
       "name" => name,
       "email" => email,
